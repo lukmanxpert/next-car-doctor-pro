@@ -5,6 +5,7 @@
     --font-display: "Satoshi", "sans-serif";
     --breakpoint-3xl: 120rem;
     --color-primary-100: #FF3811;
+    --color-text-grey: #737373;
     --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
     --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
     /* ... */
