@@ -4,6 +4,9 @@ import parts from '../../../public/assets/images/about_us/parts.jpg'
 import person from '../../../public/assets/images/about_us/person.jpg'
 
 export default function AboutUs() {
+    // 
+    // 
+    // 
     return (
         <div className='flex flex-col-reverse md:flex-row justify-between items-center gap-4 md:gap-12 mt-10'>
             <div className='flex-1'>
