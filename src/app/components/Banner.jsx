@@ -40,11 +40,10 @@ export default function Banner() {
       </div>
       <div className='absolute md:top-20 left-10 md:left-20 top-1/2 -translate-y-1/2 md:translate-y-0 text-white md:space-y-6'>
         <div className='leading-16'>
-          <h1 className='text-3xl md:w-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Affordable</h1>
-          <h1 className='text-3xl md:w-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Price For Car</h1>
-          <h1 className='text-3xl md:w-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Servicing</h1>
+          <h1 className='text-3xl md:text-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Affordable</h1>
+          <h1 className='text-3xl md:text-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Price For Car</h1>
+          <h1 className='text-3xl md:text-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Servicing</h1>
         </div>
-        {/* <h1 className='capitalize text-6xl font-semibold leading-16'>Affordable <br /> price for car <br /> servicing</h1> */}
         <p className='text-gray-300 hidden md:block my-2'>There are many variations of passages of  available, but <br /> the majority have suffered alteration in some form</p>
         <div className='flex mt-4 gap-4 items-center'>
           <button className='bg-primary-100 rounded text-white cursor-pointer py-2 px-3 font-semibold'>Discover More</button>
