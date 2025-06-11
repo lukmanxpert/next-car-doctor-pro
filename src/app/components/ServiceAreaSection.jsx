@@ -1,12 +1,12 @@
 import Image from "next/image";
 import HeaderTitle from "../shared/HeaderTitle";
 import { FaArrowRight } from "react-icons/fa";
-import dbConnect from "../lib/dbConnect";
+import dbConnect, { collectionNameObj } from "../lib/dbConnect";
+import Link from "next/link";
 
 export default async function ServiceAreaSection() {
-    const servicesCollection = dbConnect("services")
+    const servicesCollection = dbConnect(collectionNameObj.serviceCollection)
     const data = await servicesCollection.find({}).toArray()
-    console.log(data);
     return (
         <div className="my-4">
             <HeaderTitle name={"Service"} title={"Our Service Area"} desc1={"the majority have suffered alteration in some form, by injected humour, or randomised"} desc2={"words which don't look even slightly believable."} />
@@ -31,9 +31,9 @@ export default async function ServiceAreaSection() {
                                     <h1 className="text-lg md:text-xl lg:text-2xl font-bold text-text-2 my-1">{service.title}</h1>
                                     <div className="flex justify-between items-center gap-4 mt-auto">
                                         <p className="text-base md:text-lg font-semibold text-primary-100">Price: ${service.price}</p>
-                                        <button className="text-primary-100 cursor-pointer hover:scale-125 transition">
+                                        <Link href={`service/${service._id}`} className="text-primary-100 cursor-pointer hover:scale-125 transition">
                                             <FaArrowRight size={20} />
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
