@@ -23,21 +23,22 @@ export default function Banner() {
   };
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     }, 3000);
+    return () => clearInterval(interval);
   }, [])
 
   return (
-    <div className="relative w-full mx-auto">
-      <div className="overflow-hidden">
-        <Image
-          src={images[current]}
-          alt={`Banner ${current + 1}`}
-          className="w-full transition brightness-50 md:h-[calc(100vh-4rem)] object-center "
-          priority
-        />
-      </div>
+    <div className="relative w-full aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] overflow-hidden min-h-[300px] md:min-h-[400px] lg:min-h-[500px]">
+      <Image
+        src={images[current]}
+        alt={`Banner ${current + 1}`}
+        fill
+        style={{ objectFit: 'cover' }}
+        className="transition brightness-50"
+        priority
+      />
       <div className='absolute md:top-20 left-10 md:left-20 top-1/2 -translate-y-1/2 md:translate-y-0 text-white md:space-y-6'>
         <div className='leading-16'>
           <h1 className='text-3xl md:text-4xl lg:text-6xl font-semibold leading-10 lg:leading-16'>Affordable</h1>
