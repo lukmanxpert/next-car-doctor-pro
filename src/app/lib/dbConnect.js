@@ -3,6 +3,7 @@ import { ServerApiVersion } from "mongodb";
 
 export const collectionNameObj = {
   serviceCollection: "services",
+  userCollection: "users",
 };
 const dbConnect = (collection) => {
   const uri = process.env.db_uri;
