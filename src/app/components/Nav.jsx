@@ -8,6 +8,7 @@ import { BsHandbag } from "react-icons/bs";
 import { usePathname } from 'next/navigation';
 
 export default function Nav() {
+    const user = false
     const pathname = usePathname();
     const links = <>
         <li>
@@ -52,6 +53,23 @@ export default function Nav() {
                     <button className='cursor-pointer transition hover:scale-125 hover:text-primary-100'><CiSearch size={20} /></button>
                 </div>
                 <button className="btn bg-transparent text-primary-100 border-primary-100 hover:bg-primary-100 hover:text-white">Appointment</button>
+                {/* user info */}
+                <div className="dropdown mx-2 dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img
+                                alt="Tailwind CSS Navbar component"
+                                src={user ? user.img : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+                        </div>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><Link href={"profile"} className="justify-between navLink">Profile<span className="badge">New</span></Link></li>
+                        <li><Link href={"/login"} className={`${(pathname.includes("/login") || pathname.includes("/register")) && "active"} navLink`}>Login</Link></li>
+                        <li><button className='navLink'>Logout</button></li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
