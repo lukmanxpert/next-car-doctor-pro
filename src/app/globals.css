@@ -12,7 +12,11 @@
     /* ... */
 }
 
-.navLink:hover{
+body {
+    overflow-y: scroll;
+}
+
+.navLink:hover {
     background-color: var(--color-primary-100);
     color: white;
     border-radius: 0.5rem;

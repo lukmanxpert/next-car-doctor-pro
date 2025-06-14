@@ -16,7 +16,7 @@ export default function RegisterForm() {
         if (result.error) {
             toast.error(result.message)
         }
-        if (result.data.acknowledged) {
+        if (result.success) {
             toast.success(result.message)
             setFormData({
                 email: "",

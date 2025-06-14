@@ -1,6 +1,7 @@
-"use server"
+"use server";
 import dbConnect from "@/app/lib/dbConnect";
 import { collectionNameObj } from "@/app/lib/dbConnect";
+import bcrypt from "bcrypt";
 
 export const registerUser = async (payload) => {
   const { name, email, password } = payload;
@@ -20,13 +21,19 @@ export const registerUser = async (payload) => {
       error: true,
     };
   }
-  const result = await userCollection.insertOne(payload);
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const data = {
+    name,
+    email,
+    password: hashedPassword,
+  };
+  const result = await userCollection.insertOne(data);
   if (result.acknowledged) {
     return {
       message: "User register successfully",
       success: true,
       error: false,
-      data: result,
     };
   }
 };

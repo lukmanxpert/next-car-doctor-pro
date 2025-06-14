@@ -1,20 +1,40 @@
 "use client"
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { FaFacebook } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa6";
+import { FaGoogle } from "react-icons/fa";
+import { signIn } from "next-auth/react"
+import { useRouter } from 'next/navigation';
+
 
 export default function LogInForm() {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     })
+    const router = useRouter()
     const handleSubmit = async (event) => {
         event.preventDefault()
+        const email = formData.email
+        const password = formData.password
+        try {
+            const result = await signIn("credentials", { redirect: false, email, password })
+            if (result.ok) {
+                router.push("/")
+            }
+            console.log("login result", result);
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
+    console.log(formData);
     return (
         <div className="w-full border border-gray-200 rounded-lg p-8 shadow-sm bg-white">
             <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Login</h2>
@@ -57,14 +77,14 @@ export default function LogInForm() {
             <div className="my-6 text-center text-gray-500 text-sm">Or Sign In with</div>
 
             <div className="flex justify-center space-x-4 mb-4">
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-blue-600 hover:shadow">
-                    <i className="fab fa-facebook-f"></i>
+                <button className="w-10 h-10 cursor-pointer hover:scale-125 transition-all rounded-full bg-gray-100 flex items-center justify-center text-blue-600 hover:shadow">
+                    <FaFacebook />
                 </button>
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-blue-800 hover:shadow">
-                    <i className="fab fa-linkedin-in"></i>
+                <button className="w-10 h-10 cursor-pointer hover:scale-125 transition-all rounded-full bg-gray-100 flex items-center justify-center text-blue-800 hover:shadow">
+                    <FaLinkedin />
                 </button>
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-primary-100 hover:shadow">
-                    <i className="fab fa-google"></i>
+                <button className="w-10 h-10 cursor-pointer hover:scale-125 transition-all rounded-full bg-gray-100 flex items-center justify-center text-blue-600 hover:shadow">
+                    <FaGoogle />
                 </button>
             </div>
 
