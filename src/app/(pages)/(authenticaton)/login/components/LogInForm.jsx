@@ -6,6 +6,7 @@ import { FaLinkedin } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 
 export default function LogInForm() {
@@ -19,12 +20,20 @@ export default function LogInForm() {
         const email = formData.email
         const password = formData.password
         try {
-            const result = await signIn("credentials", { redirect: false, email, password })
+            const result = await signIn("credentials", { redirect: false, email, password, callbackUrl: "/" })
             if (result.ok) {
+                toast.success("login Success!")
+                setFormData({
+                    email: "",
+                    password: ""
+                })
                 router.push("/")
+            } else {
+                toast.error("Authentication failed!")
             }
             console.log("login result", result);
         } catch (error) {
+            toast.error("Authentication failed!")
             console.log(error);
         }
 

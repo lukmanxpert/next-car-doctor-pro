@@ -6,8 +6,11 @@ import logo from '../../../public/assets/logo.svg'
 import { CiSearch } from "react-icons/ci";
 import { BsHandbag } from "react-icons/bs";
 import { usePathname } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react'
 
 export default function Nav() {
+    const { data: session, status: sessionStatus } = useSession()
+    console.log("session", session);
     const user = false
     const pathname = usePathname();
     const links = <>
@@ -65,9 +68,14 @@ export default function Nav() {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><Link href={"profile"} className="justify-between navLink">Profile<span className="badge">New</span></Link></li>
-                        <li><Link href={"/login"} className={`${(pathname.includes("/login") || pathname.includes("/register")) && "active"} navLink`}>Login</Link></li>
-                        <li><button className='navLink'>Logout</button></li>
+                        {
+                            sessionStatus === "authenticated"
+                                ? <>
+                                    <li><Link href={"profile"} className="justify-between navLink">Profile<span className="badge">New</span></Link></li>
+                                    <li><button onClick={() => signOut()} className='navLink'>Logout</button></li>
+                                </>
+                                : <li><Link href={"/login"} className={`${(pathname.includes("/login") || pathname.includes("/register")) && "active"} navLink`}>Login</Link></li>
+                        }
                     </ul>
                 </div>
             </div>
