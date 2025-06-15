@@ -1,12 +1,10 @@
 "use client"
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { FaFacebook } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa6";
-import { FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import SocialLogIn from '../../components/SocialLogIn';
 
 
 export default function LogInForm() {
@@ -85,17 +83,7 @@ export default function LogInForm() {
 
             <div className="my-6 text-center text-gray-500 text-sm">Or Sign In with</div>
 
-            <div className="flex justify-center space-x-4 mb-4">
-                <button className="w-10 h-10 cursor-pointer hover:scale-125 transition-all rounded-full bg-gray-100 flex items-center justify-center text-blue-600 hover:shadow">
-                    <FaFacebook />
-                </button>
-                <button className="w-10 h-10 cursor-pointer hover:scale-125 transition-all rounded-full bg-gray-100 flex items-center justify-center text-blue-800 hover:shadow">
-                    <FaLinkedin />
-                </button>
-                <button className="w-10 h-10 cursor-pointer hover:scale-125 transition-all rounded-full bg-gray-100 flex items-center justify-center text-blue-600 hover:shadow">
-                    <FaGoogle />
-                </button>
-            </div>
+            <SocialLogIn />
 
             <div className="text-center text-sm text-gray-600">
                 Don't have an account? <Link href={"/register"} className="text-primary-100 font-medium">Create Account</Link>

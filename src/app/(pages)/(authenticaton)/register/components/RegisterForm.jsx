@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { registerUser } from "../../../../actions/auth/registerController"
 import toast from 'react-hot-toast'
+import SocialLogIn from '../../components/SocialLogIn'
 
 export default function RegisterForm() {
     const [formData, setFormData] = useState({
@@ -88,17 +89,7 @@ export default function RegisterForm() {
 
             <div className="my-6 text-center text-gray-500 text-sm">Or Sign In with</div>
 
-            <div className="flex justify-center space-x-4 mb-4">
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-blue-600 hover:shadow">
-                    <i className="fab fa-facebook-f"></i>
-                </button>
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-blue-800 hover:shadow">
-                    <i className="fab fa-linkedin-in"></i>
-                </button>
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-red-500 hover:shadow">
-                    <i className="fab fa-google"></i>
-                </button>
-            </div>
+            <SocialLogIn />
 
             <div className="text-center text-sm text-gray-600">
                 Already have an account? <Link href={"/login"} className="text-primary-100 font-medium">Login</Link>

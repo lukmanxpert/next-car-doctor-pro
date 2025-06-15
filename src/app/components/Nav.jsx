@@ -11,7 +11,7 @@ import { signOut, useSession } from 'next-auth/react'
 export default function Nav() {
     const { data: session, status: sessionStatus } = useSession()
     console.log("session", session);
-    const user = false
+    const user = session?.user;
     const pathname = usePathname();
     const links = <>
         <li>
@@ -62,7 +62,7 @@ export default function Nav() {
                         <div className="w-10 rounded-full">
                             <img
                                 alt="Tailwind CSS Navbar component"
-                                src={user ? user.img : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+                                src={user ? user.image : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
                         </div>
                     </div>
                     <ul
