@@ -68,7 +68,6 @@ export const authOptions = {
             role: "user"
           };
           const result = await userCollection.insertOne(payload);
-          console.log("user save database info", result);
         }
       }
       return true;

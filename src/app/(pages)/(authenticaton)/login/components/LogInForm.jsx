@@ -29,10 +29,8 @@ export default function LogInForm() {
             } else {
                 toast.error("Wrong Credentials")
             }
-            console.log("login result", result);
         } catch (error) {
             toast.error("Authentication failed!")
-            console.log(error);
         }
 
     }
@@ -41,7 +39,6 @@ export default function LogInForm() {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
-    console.log(formData);
     return (
         <div className="w-full border border-gray-200 rounded-lg p-8 shadow-sm bg-white">
             <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Login</h2>
