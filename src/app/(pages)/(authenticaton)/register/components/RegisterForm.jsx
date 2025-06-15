@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { registerUser } from "../../../../actions/auth/registerController"
 import toast from 'react-hot-toast'
 import SocialLogIn from '../../components/SocialLogIn'
+import { useRouter } from 'next/navigation'
 
 export default function RegisterForm() {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -24,6 +26,7 @@ export default function RegisterForm() {
                 name: "",
                 password: ""
             })
+            router.push("/login")
         } else {
             toast(result.message)
         }

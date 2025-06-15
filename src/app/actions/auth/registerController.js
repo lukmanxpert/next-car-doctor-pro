@@ -27,6 +27,7 @@ export const registerUser = async (payload) => {
     name,
     email,
     password: hashedPassword,
+    role: "user"
   };
   const result = await userCollection.insertOne(data);
   if (result.acknowledged) {

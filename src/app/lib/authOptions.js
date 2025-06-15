@@ -1,6 +1,7 @@
 import { logInUser } from "@/app/actions/auth/loginUserController";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import dbConnect, { collectionNameObj } from "./dbConnect";
 
 export const authOptions = {
@@ -40,6 +41,10 @@ export const authOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
   ],
   pages: {
     signIn: "/login",
@@ -60,6 +65,7 @@ export const authOptions = {
             name,
             email,
             image,
+            role: "user"
           };
           const result = await userCollection.insertOne(payload);
           console.log("user save database info", result);
