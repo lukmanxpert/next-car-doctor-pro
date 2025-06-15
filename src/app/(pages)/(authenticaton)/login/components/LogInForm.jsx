@@ -27,7 +27,7 @@ export default function LogInForm() {
                 })
                 router.push("/")
             } else {
-                toast.error("Authentication failed!")
+                toast.error("Wrong Credentials")
             }
             console.log("login result", result);
         } catch (error) {
