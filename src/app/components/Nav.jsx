@@ -29,6 +29,11 @@ export default function Nav() {
         <li>
             <Link href={"/contact"} className={`${pathname.includes("/contact") && "active"} navLink`}>Contact</Link>
         </li>
+        {
+            user && <li>
+                <Link href={"/my-bookings"} className={`${pathname.includes("/my-bookings") && "active"} navLink`}>My Bookings</Link>
+            </li>
+        }
     </>
     return (
         <div className="navbar sticky top-0 z-50 bg-base-100 shadow-sm">
@@ -57,27 +62,33 @@ export default function Nav() {
                 </div>
                 <button className="btn bg-transparent text-primary-100 border-primary-100 hover:bg-primary-100 hover:text-white">Appointment</button>
                 {/* user info */}
-                <div className="dropdown mx-2 dropdown-end">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src={user?.image ? user.image : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+                {
+                    user ? <div className="dropdown mx-2 dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="Tailwind CSS Navbar component"
+                                    src={user?.image ? user?.image : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+                            </div>
                         </div>
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            {
+                                sessionStatus === "authenticated"
+                                    ? <>
+                                        <li><Link href={"profile"} className="justify-between navLink">Profile<span className="badge">New</span></Link></li>
+                                        <li><button onClick={() => signOut()} className='navLink'>Logout</button></li>
+                                    </>
+                                    : <li></li>
+                            }
+                        </ul>
                     </div>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        {
-                            sessionStatus === "authenticated"
-                                ? <>
-                                    <li><Link href={"profile"} className="justify-between navLink">Profile<span className="badge">New</span></Link></li>
-                                    <li><button onClick={() => signOut()} className='navLink'>Logout</button></li>
-                                </>
-                                : <li><Link href={"/login"} className={`${(pathname.includes("/login") || pathname.includes("/register")) && "active"} navLink`}>Login</Link></li>
-                        }
-                    </ul>
-                </div>
+                        : <div>
+                            <Link href={"/login"} className="btn bg-transparent text-primary-100 border-primary-100 hover:bg-primary-100 hover:text-white ml-2">Login</Link>
+                        </div>
+                }
+
             </div>
         </div>
     )
