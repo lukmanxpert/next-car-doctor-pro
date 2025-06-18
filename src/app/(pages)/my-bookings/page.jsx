@@ -1,9 +1,22 @@
 import MyBookings from "./components/MyBookings";
 
-export default function MyBookingsPage() {
+const fetchBookings = async () => {
+    const result = await fetch("http://localhost:3000/api/service");
+    if (!result.ok) {
+        // Optionally, handle specific status codes
+        return [];
+    }
+    // Check if response has content
+    const text = await result.text();
+    if (!text) return [];
+    return JSON.parse(text);
+}
+
+export default async function MyBookingsPage() {
+    const bookings = await fetchBookings();
     return (
         <div>
-            <MyBookings />
+            <MyBookings bookings={bookings} />
         </div>
     )
 }

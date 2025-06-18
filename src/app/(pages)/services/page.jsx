@@ -1,7 +1,10 @@
+import ServiceAreaSection from '@/app/components/ServiceAreaSection'
 import React from 'react'
 
-export default function page() {
+export default function ServicePage() {
   return (
-    <div>page</div>
+    <div>
+      <ServiceAreaSection />
+    </div>
   )
 }

@@ -1,16 +1,6 @@
-"use client"
-import React, { useEffect, useState } from 'react'
+import DeleteBtn from "./DeleteBtn";
 
-export default function MyBookings() {
-    const [bookings, setBookings] = useState([])
-    useEffect(() => {
-        const fetchBookings = async () => {
-            const result = await fetch("http://localhost:3000/api/service")
-            const data = await result.json()
-            setBookings(data)
-        }
-        fetchBookings()
-    }, [])
+export default function MyBookings({ bookings }) {
     return (
         <div className="overflow-x-auto w-full py-6">
             <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
@@ -45,12 +35,7 @@ export default function MyBookings() {
                                 <td className="px-4 py-2">{booking.date}</td>
                                 <td className="px-4 py-2 font-semibold">${booking.servicePrice}</td>
                                 <td className="px-4 py-2">
-                                    <button
-                                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-                                    // onClick={() => handleDelete(booking._id)}
-                                    >
-                                        Delete
-                                    </button>
+                                    <DeleteBtn id={booking._id} />
                                 </td>
                             </tr>
                         ))
