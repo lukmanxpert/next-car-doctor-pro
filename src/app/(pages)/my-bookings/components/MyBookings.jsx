@@ -1,4 +1,5 @@
 import DeleteBtn from "./DeleteBtn";
+import UpdateBtn from "./UpdateBtn";
 
 export default function MyBookings({ bookings }) {
     return (
@@ -34,7 +35,8 @@ export default function MyBookings({ bookings }) {
                                 <td className="px-4 py-2">{booking.serviceName}</td>
                                 <td className="px-4 py-2">{booking.date}</td>
                                 <td className="px-4 py-2 font-semibold">${booking.servicePrice}</td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 flex gap-2">
+                                    <UpdateBtn id={booking._id} />
                                     <DeleteBtn id={booking._id} />
                                 </td>
                             </tr>
