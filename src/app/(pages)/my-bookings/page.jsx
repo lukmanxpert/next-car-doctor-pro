@@ -1,7 +1,10 @@
+import { headers } from "next/headers";
 import MyBookings from "./components/MyBookings";
 
 const fetchBookings = async () => {
-    const result = await fetch("http://localhost:3000/api/service");
+    const result = await fetch("http://localhost:3000/api/service", {
+        headers: headers()
+    });
     if (!result.ok) {
         // Optionally, handle specific status codes
         return [];

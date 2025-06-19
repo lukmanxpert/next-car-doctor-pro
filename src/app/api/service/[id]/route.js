@@ -22,7 +22,7 @@ export const DELETE = async (req, { params }) => {
   const isUserOk = user?.email === bookingUserEmail;
   if (isUserOk) {
     const deleteResponse = await bookingCollection.deleteOne(query);
-    revalidatePath("/my-bookings")
+    revalidatePath("/my-bookings");
     return NextResponse.json(deleteResponse);
   } else {
     return NextResponse.json(

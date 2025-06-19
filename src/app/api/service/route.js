@@ -5,15 +5,13 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   const session = await getServerSession(authOptions);
-  if (!session || !session.user?.email) {
-    console.log("from get route user", session.user);
+  if (!session || !session?.user?.email) {
     return NextResponse.json([], { status: 401 });
   }
   const bookingCollection = dbConnect(collectionNameObj.bookingCollection);
   const bookings = await bookingCollection
     .find({ email: session.user.email })
     .toArray();
-  console.log("from get route bookings", bookings);
   return NextResponse.json(bookings);
 };
 
