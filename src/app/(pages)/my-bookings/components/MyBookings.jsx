@@ -1,3 +1,4 @@
+import Link from "next/link";
 import DeleteBtn from "./DeleteBtn";
 import UpdateBtn from "./UpdateBtn";
 
@@ -35,8 +36,8 @@ export default function MyBookings({ bookings }) {
                                 <td className="px-4 py-2">{booking.serviceName}</td>
                                 <td className="px-4 py-2">{booking.date}</td>
                                 <td className="px-4 py-2 font-semibold">${booking.servicePrice}</td>
-                                <td className="px-4 py-2 flex gap-2">
-                                    <UpdateBtn id={booking._id} />
+                                <td className="px-4 py-2">
+                                    <Link href={`/update/${booking._id}`} className="bg-green-500 inline-block hover:bg-green-600 cursor-pointer text-white px-3 py-1 mr-2 rounded">Update</Link>
                                     <DeleteBtn id={booking._id} />
                                 </td>
                             </tr>
