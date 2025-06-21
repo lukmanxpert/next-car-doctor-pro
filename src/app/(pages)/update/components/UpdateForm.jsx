@@ -8,15 +8,10 @@ export default function UpdateBookingForm({ data }) {
     const router = useRouter()
     const { data: session } = useSession()
     const user = session?.user
-    console.log('users from update', user);
     const [formData, setFormData] = useState({
-        name: user?.name,
-        email: user?.email,
         phone: data?.phone,
         date: data?.date,
-        dueAmount: data?.dueAmount,
-        address: data?.address,
-        serviceId: data?._id,
+        address: data?.address
     })
     const handleChange = event => {
         const { name, value } = event.target;
@@ -27,14 +22,17 @@ export default function UpdateBookingForm({ data }) {
         if (!user) {
             return router.push("/login")
         }
-        const response = await fetch("http://localhost:3000/api/service", {
-            method: "POST",
+        const response = await fetch(`http://localhost:3000/api/my-bookings/${data._id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(formData)
         })
-        const data = await response.json()
-        if (data.acknowledged) {
-            toast.success("Order Success!")
-            router.push("/services")
+        const responseData = await response.json()
+        if (responseData.acknowledged) {
+            toast.success("Update Success!")
+            router.push("/my-bookings")
         }
         console.log("response data", data);
     }
@@ -49,7 +47,7 @@ export default function UpdateBookingForm({ data }) {
                             required
                             type="text"
                             name='name'
-                            value={formData.name}
+                            value={user?.name}
                             readOnly
                             placeholder="Your Name"
                             className="p-3 rounded-md bg-white border-none w-full focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -58,8 +56,8 @@ export default function UpdateBookingForm({ data }) {
                             required
                             type="email"
                             name='email'
-                            value={formData.email}
-                            readOnly={formData.email}
+                            value={user?.email}
+                            readOnly
                             placeholder="Your Email"
                             className="p-3 rounded-md bg-white border-none w-full focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
@@ -78,7 +76,7 @@ export default function UpdateBookingForm({ data }) {
                             required
                             type="number"
                             name='dueAmount'
-                            value={formData.dueAmount}
+                            value={data.dueAmount}
                             readOnly
                             placeholder="Due Amount"
                             className="p-3 rounded-md bg-white border-none w-full focus:outline-none focus:ring-2 focus:ring-orange-500"
