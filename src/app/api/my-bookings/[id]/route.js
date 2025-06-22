@@ -14,9 +14,9 @@ export const GET = async (req, { params }) => {
 export const PATCH = async (req, { params }) => {
   const p = await params;
   const bookingsCollection = dbConnect(collectionNameObj.bookingCollection);
-  const query = new ObjectId(p.id);
-  const body = req.json();
-  const filter = {
+  const query = { _id: new ObjectId(p.id) };
+  const body = await req.json();
+  const updateDoc = {
     $set: body,
   };
   const options = {
@@ -24,9 +24,9 @@ export const PATCH = async (req, { params }) => {
   };
   const updateResponse = await bookingsCollection.updateOne(
     query,
-    filter,
+    updateDoc,
     options
   );
-  revalidatePath("/my-bookings")
+  revalidatePath("/my-bookings");
   return NextResponse.json(updateResponse);
 };

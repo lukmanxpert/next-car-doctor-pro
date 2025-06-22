@@ -24,9 +24,6 @@ export default function UpdateBookingForm({ data }) {
         }
         const response = await fetch(`http://localhost:3000/api/my-bookings/${data._id}`, {
             method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
             body: JSON.stringify(formData)
         })
         const responseData = await response.json()
@@ -34,10 +31,7 @@ export default function UpdateBookingForm({ data }) {
             toast.success("Update Success!")
             router.push("/my-bookings")
         }
-        console.log("response data", data);
     }
-    console.log("data", data);
-    console.log("form data", formData);
     return (
         <div>
             <div className="mx-auto p-6 bg-[#F3F3F3] rounded-lg shadow-md my-4">
